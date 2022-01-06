@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
-  # namespace :api, defaults: { format: :json } do
-  #   resources :users, only: %w[show]
-  #   get '/member-data', to: 'members#show'
-  # end
+  namespace :api do
+    resources :users, only: %i[show]
+    resources :tasks
+  end
 
   devise_for :users, defaults: { format: :json },
     path: 'api',
@@ -15,6 +15,4 @@ Rails.application.routes.draw do
       sessions: 'sessions',
       registrations: 'registrations'
     }
-    
-  get '/api/member-data', to: 'members#show'
 end
