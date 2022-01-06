@@ -4,12 +4,12 @@ Rails.application.routes.draw do
   #   get '/member-data', to: 'members#show'
   # end
 
-  devise_for :users,
-    path: '',
+  devise_for :users, defaults: { format: :json },
+    path: 'api',
     path_names: {
-      sign_in: 'api/login',
-      sign_out: 'api/logout',
-      registration: 'api/signup'
+      sign_in: 'login',
+      sign_out: 'logout',
+      registration: 'signup'
     },
     controllers: {
       sessions: 'sessions',
