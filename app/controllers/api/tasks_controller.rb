@@ -11,7 +11,12 @@ class Api::TasksController < Api::BaseController
   def create
     @task = Task.new(task_params)
     @task.user_id = @user.id
-    json_response(@task, :created) if @task.save
+    
+    if @task.save
+      json_response(@task, :created)
+    else
+      json_response({ error: "Task not created" }, :unprocessable_entity)
+    end
   end
 
   # GET /tasks/:id
@@ -21,14 +26,20 @@ class Api::TasksController < Api::BaseController
 
   # PUT /tasks/:id
   def update
-    @task.update(task_params)
-    head :no_content
+    if @task.update(task_params)
+      json_response({ message: "Successfully updated task" }, :ok)
+    else
+      json_response({ message: "Failed to update task" }, :unprocessable_entity)
+    end
   end
 
   # DELETE /tasks/:id
   def destroy
-    @task.destroy
-    head :no_content
+    if @task.destroy
+      head :no_content
+    else
+      json_response({ message: "Failed to delete task" }, :unprocessable_entity)
+    end
   end
 
   private
