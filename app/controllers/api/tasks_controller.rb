@@ -27,7 +27,7 @@ class Api::TasksController < Api::BaseController
   # PUT /tasks/:id
   def update
     if @task.update(task_params)
-      json_response({ message: "Successfully updated task" }, :ok)
+      json_response(@task, :ok)
     else
       json_response({ message: "Failed to update task" }, :unprocessable_entity)
     end
