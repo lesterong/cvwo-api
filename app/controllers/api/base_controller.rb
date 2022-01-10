@@ -1,18 +1,7 @@
 class Api::BaseController < ApplicationController
-
   before_action :authenticate_user!
 
-  rescue_from ActiveRecord::RecordNotFound, with: :not_found
-
-  def not_found
-    render json: {
-      'errors': [
-        {
-          'status': '404',
-          'title': 'Not Found'
-        }
-      ]
-    }, status: 404
+  rescue_from ActiveRecord::RecordNotFound do
+    json_response({ message: 'Not found'}, :not_found)
   end
-
 end

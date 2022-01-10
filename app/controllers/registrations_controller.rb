@@ -1,8 +1,8 @@
 class RegistrationsController < Devise::RegistrationsController
   respond_to :json
 
-  rescue_from ActiveRecord::RecordNotUnique do |e|
-    json_response({ message: "There is already an account with this email. Please login instead." }, :conflict)
+  rescue_from ActiveRecord::RecordNotUnique do
+    json_response({ message: "Email already in use." }, :conflict)
   end
 
   private
@@ -16,11 +16,10 @@ class RegistrationsController < Devise::RegistrationsController
   end
 
   def register_success
-    json_response({ message: "Signed up sucessfully." }, :ok)
+    json_response({ message: "Signed up sucessfully." })
   end
 
   def register_failed
     json_response({ message: "Something went wrong." }, :bad_request)
   end
-
 end

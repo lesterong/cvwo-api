@@ -15,7 +15,7 @@ class Api::TasksController < Api::BaseController
     if @task.save
       json_response(@task, :created)
     else
-      json_response({ error: "Task not created" }, :unprocessable_entity)
+      json_response({ message: "Task not created" }, :unprocessable_entity)
     end
   end
 
@@ -43,6 +43,7 @@ class Api::TasksController < Api::BaseController
   end
 
   private
+  
   def set_user
     @user = current_user
   end
