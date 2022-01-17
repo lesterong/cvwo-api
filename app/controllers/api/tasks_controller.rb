@@ -2,12 +2,10 @@ class Api::TasksController < Api::BaseController
   before_action :set_user
   before_action :set_task, only: [:show, :update, :destroy]
 
-  # GET /tasks
   def index
     json_response(@user.tasks)
   end
 
-  # POST /tasks
   def create
     @task = Task.new(task_params)
     @task.user_id = @user.id
@@ -19,12 +17,10 @@ class Api::TasksController < Api::BaseController
     end
   end
 
-  # GET /tasks/:id
   def show
     json_response(@task)
   end
 
-  # PUT /tasks/:id
   def update
     if @task.update(task_params)
       json_response(@task, :ok)
@@ -33,7 +29,6 @@ class Api::TasksController < Api::BaseController
     end
   end
 
-  # DELETE /tasks/:id
   def destroy
     if @task.destroy
       head :no_content

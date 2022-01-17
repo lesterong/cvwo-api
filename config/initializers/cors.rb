@@ -7,7 +7,7 @@
 
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
-    origins 'http://localhost:3000'
+    origins 'https://taskority.lesterong.com'
     resource '/api/*',
       headers: %w(Authorization),
       methods: [:get, :post, :put, :patch, :delete, :options, :head],
