@@ -23,7 +23,7 @@ class Api::TasksController < Api::BaseController
 
   def update
     if @task.update(task_params)
-      json_response(@task, :ok)
+      json_response(@task)
     else
       json_response({ message: "Failed to update task" }, :unprocessable_entity)
     end
@@ -44,7 +44,7 @@ class Api::TasksController < Api::BaseController
   end
 
   def task_params
-    params.permit(:title, :description, :duedate, :tag, :completed, :user_id)
+    params.require(:task).permit(:title, :description, :duedate, :tag, :completed, :user_id)
   end
 
   def set_task
