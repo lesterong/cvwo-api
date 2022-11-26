@@ -72,4 +72,3 @@ You can test this API locally:
    devise:
      jwt_secret_key: <rake secret key> 
    ```
-5. 
